@@ -7,12 +7,11 @@
 
 <script>
 export default {
-  name: "Game",
-  components: {},
-};
+  name: "Game"
+}
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .background {
   background-color: red;
 
