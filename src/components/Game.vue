@@ -64,7 +64,6 @@ export default {
     }
   },
   methods: {
-
     updateQuestion() {
 
       //Get a random number between 0 and size of the question-database
