@@ -65,21 +65,10 @@ export default {
   },
   methods: {
 
-    getState() {
-      if (this.state === 0)
-        return "";
-
-      else if (this.state === 1)
-        return "answer-correct";
-
-      else if (this.state === 2)
-        return "answer-incorrect";
-    },
     updateQuestion() {
 
       //Get a random number between 0 and size of the question-database
       let questionIndex = Math.floor(Math.random() * this.database.length)
-      console.log("RANDOM QUESTION INDEX: " + questionIndex);
 
       //Set the current questions values.
       this.currentQuestion.question = this.database[questionIndex].question;
@@ -106,13 +95,21 @@ export default {
       }
 
     },
-
+    onAnswer(){
+      setTimeout(()=>{
+        this.state = 0;
+        this.updateQuestion();
+      }, 2000);
+    },
     onCorrect() {
       this.state = 1;
+      this.onAnswer();
     },
     onInCorrect() {
       this.state = 2;
+      this.onAnswer();
     },
+
     button1Click() {
       if (this.currentQuestion.index === 0)
         this.onCorrect();
