@@ -1,33 +1,33 @@
 <template>
   <div class="background">
-    <div class="question-box">
+    <div class="question-box" v-bind:class="{ 'answer-correct': state===1, 'answer-incorrect':  state===2}">
       <div class="question-counter">
-        #{{currentQuestion.index+1}}
+        #{{ currentQuestion.index + 1 }}
       </div>
       <div class="question-section">
-        {{currentQuestion.question}}=?
+        {{ currentQuestion.question }}=?
       </div>
     </div>
 
     <div class="answer-boxes">
       <div class="upper-box">
         <div class="button  red-button" v-on:click="button1Click">
-          5
+          {{ buttonData[0] }}
         </div>
         <div class="button green-button" v-on:click="button2Click">
-          9
+          {{ buttonData[1] }}
         </div>
 
       </div>
-    <div class="lower-box">
+      <div class="lower-box">
 
-      <div class="button blue-button" v-on:click="button3Click">
-            10
+        <div class="button blue-button" v-on:click="button3Click">
+          {{ buttonData[2] }}
+        </div>
+        <div class="button yellow-button" v-on:click="button4Click">
+          {{ buttonData[3] }}
+        </div>
       </div>
-      <div class="button yellow-button" v-on:click="button4Click">
-            2
-      </div>
-    </div>
 
 
     </div>
@@ -47,29 +47,100 @@ export default {
         {question: "2+2", answer: "4"},
         {question: "1+3", answer: "4"},
         {question: "2+5", answer: "7"},
-        {question: "6+2", answer: "8"},
+        {question: "6+2", answer: "8"}
       ],
       currentQuestion: {
         index: 0,
         question: '2+2',
         answer: '4'
-      }
+      },
+      buttonData: [
+        0,
+        0,
+        0,
+        0
+      ],
+      state: 0,
     }
   },
   methods: {
 
+    getState() {
+      if (this.state === 0)
+        return "";
+
+      else if (this.state === 1)
+        return "answer-correct";
+
+      else if (this.state === 2)
+        return "answer-incorrect";
+    },
+    updateQuestion() {
+
+      //Get a random number between 0 and size of the question-database
+      let questionIndex = Math.floor(Math.random() * this.database.length)
+      console.log("RANDOM QUESTION INDEX: " + questionIndex);
+
+      //Set the current questions values.
+      this.currentQuestion.question = this.database[questionIndex].question;
+      this.currentQuestion.answer = this.database[questionIndex].answer;
+
+      //Get a random button to display the real answer
+      let randomButtonIndex = Math.floor(Math.random() * 4);
+      this.currentQuestion.index = randomButtonIndex;
+
+      for (let i = 0; i < 4; i++) {
+
+        //If the current index = the random button that is supposed to display the REAL answer
+        //Set it's values to the correct answer.
+        if (i === randomButtonIndex) {
+          this.buttonData[i] = this.currentQuestion.answer;
+        }
+
+        //If the button isn't the button that is supposed to display the REAL answer
+        //Display a random number
+        else {
+          //TODO: fix this shit.
+          this.buttonData[i] = Math.floor(Math.random() * 10);
+        }
+      }
+
+    },
+
+    onCorrect() {
+      this.state = 1;
+    },
+    onInCorrect() {
+      this.state = 2;
+    },
     button1Click() {
-      console.log("Button 1");
+      if (this.currentQuestion.index === 0)
+        this.onCorrect();
+      else
+        this.onInCorrect();
     },
     button2Click() {
-      console.log("Button 2");
+      if (this.currentQuestion.index === 1)
+        this.onCorrect();
+      else
+        this.onInCorrect();
     },
     button3Click() {
-      console.log("Button 3");
+      if (this.currentQuestion.index === 2)
+        this.onCorrect();
+      else
+        this.onInCorrect();
     },
     button4Click() {
-      console.log("Button 4");
+      if (this.currentQuestion.index === 3)
+        this.onCorrect();
+      else
+        this.onInCorrect();
     }
+
+  },
+  mounted() {
+    this.updateQuestion();
   }
 }
 
@@ -84,14 +155,13 @@ export default {
   display: flex;
   height: 100%;
   justify-content: center;
-  flex-direction:row;
+  flex-direction: column;
 }
-
 .question-box {
   border-radius: 40px;
   background-color: white;
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   height: 465px;
   width: 870px;
 
@@ -101,14 +171,22 @@ export default {
   user-select: none;
 }
 
+
+/* TEMPORARY */
+.answer-correct {
+  background-color: #69EE7E;
+}
+.answer-incorrect {
+  background-color: #FA6666;
+}
+
 .question-counter {
   font-family: "Comic Sans MS", sans-serif;
   font-size: 64px;
   font-weight: bold;
   color: #656565;
 }
-
-.question-section{
+.question-section {
   font-family: "Comic Sans MS", sans-serif;
   font-size: 144px;
   font-weight: bold;
@@ -120,9 +198,9 @@ export default {
   height: 100%;
 }
 
-.answer-boxes{
+.answer-boxes {
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
 
   justify-content: center;
   align-items: center;
@@ -130,13 +208,13 @@ export default {
   user-select: none;
 }
 
-.button{
+.button {
 
   border-radius: 22px;
   background-color: #FA6666;
 
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
 
   justify-content: center;
   align-items: center;
@@ -160,39 +238,45 @@ export default {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
 
 }
+
 .button:hover {
-  height: 140px;
+  height: 120px;
   width: 400px;
 }
-.button:active{
+
+.button:active {
   background-color: #2c3e50;
   height: 145px;
   width: 405px;
 }
 
-.red-button{
+.red-button {
   background-color: #FA6666;
 }
-.green-button{
+
+.green-button {
   background-color: #69EE7E;
 }
-.blue-button{
+
+.blue-button {
   background-color: #6BB3E8;
 }
-.yellow-button{
+
+.yellow-button {
   background-color: #F4E072;
 }
 
-.upper-box{
+.upper-box {
   display: flex;
-  flex-direction:row;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   margin-top: 50px;
 }
-.lower-box{
+
+.lower-box {
   display: flex;
-  flex-direction:row;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   margin-top: 50px;
