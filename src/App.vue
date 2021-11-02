@@ -12,6 +12,7 @@ import Game from '@/components/Game.vue';
 
 export default {
   name: 'App',
+
   components: {
     Game
   }
@@ -19,6 +20,7 @@ export default {
 </script>
 
 <style>
+
 
 body {
   margin: 0;
