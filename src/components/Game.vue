@@ -85,7 +85,7 @@ export default {
           this.buttonData[i] = this.currentQuestion.answer;
         }
 
-        //If the button isn't the button that is supposed to display the REAL answer
+            //If the button isn't the button that is supposed to display the REAL answer
         //Display a random number
         else {
           //TODO: fix this shit.
@@ -94,8 +94,8 @@ export default {
       }
 
     },
-    onAnswer(){
-      setTimeout(()=>{
+    onAnswer() {
+      setTimeout(() => {
         this.state = 0;
         this.updateQuestion();
       }, 2000);
@@ -137,7 +137,17 @@ export default {
   },
   mounted() {
     this.updateQuestion();
+    fetch('http://127.0.0.1:8080/content/')
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data.bok);
+          this.database.question = data.question;
+          this.database.answer = data.answer;
+        });
   }
+
 }
 
 </script>
@@ -153,6 +163,7 @@ export default {
   justify-content: center;
   flex-direction: column;
 }
+
 .question-box {
   border-radius: 40px;
   background-color: white;
@@ -172,6 +183,7 @@ export default {
 .answer-correct {
   background-color: #69EE7E;
 }
+
 .answer-incorrect {
   background-color: #FA6666;
 }
@@ -182,6 +194,7 @@ export default {
   font-weight: bold;
   color: #656565;
 }
+
 .question-section {
   font-family: "Comic Sans MS", sans-serif;
   font-size: 144px;
