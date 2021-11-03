@@ -84,7 +84,7 @@ export default {
   display: flex;
   height: 100%;
   justify-content: center;
-  flex-direction:column;
+  flex-direction:row;
 }
 
 .question-box {
