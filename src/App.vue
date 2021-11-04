@@ -2,21 +2,21 @@
   <div id="app">
 
     <!--Game></Game-->
-    <operatorpage></operatorpage>
+    <landingpage></landingpage>
   </div>
 </template>
 
 <script>
 
 /*import Game from '@/components/Game.vue';*/
-import operatorpage from "@/components/operatorpage";
+import Landingpage from "@/components/landingpage";
 
 
 export default {
   name: 'App',
 
   components: {
-    operatorpage,
+    Landingpage,
     /*Game*/
 
   }
@@ -31,7 +31,7 @@ body {
 }
 
 #app {
-  font-family: "Open Sans", serif;
+  font-family: "Comic Sans MS", serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
