@@ -8,28 +8,28 @@
       </svg>
 
       <svg width="597" height="422" class="top-left-figure" viewBox="0 0 597 422" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M-163.124 353C-40.7237 112.2 394.21 -11 596.376 -42.5C493.876 -56.3333 285.976 -84.8 274.376 -88C262.776 -91.2 -6.45708 -106 -139.624 -113C-198.457 142.667 -285.524 593.8 -163.124 353Z" fill="#BAD162"/>
+        <path d="M-163.124 353C-40.7237 112.2 394.21 -11 596.376 -42.5C493.876 -56.3333 285.976 -84.8 274.376 -88C262.776 -91.2 -6.45708 -106 -139.624 -113C-198.457 142.667 -285.524 593.8 -163.124 353Z" fill="#A68ECD"/>
       </svg>
 
       <div class="rings-container">
         <svg width="149" height="149" class="background-ring" style="left: 25%; top: 20%" viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="74.5" cy="74.5" r="63.5" stroke="#7C79ED" stroke-opacity="0.3" stroke-width="22"/>
+          <circle cx="74.5" cy="74.5" r="63.5" stroke="#7C79ED" stroke-opacity="0.5" stroke-width="22"/>
         </svg>
 
         <svg width="149" height="149" class="background-ring" style="left: 80%; top: 10%"  viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="74.5" cy="74.5" r="63.5" stroke="#D16262" stroke-opacity="0.3" stroke-width="22"/>
+          <circle cx="74.5" cy="74.5" r="63.5" stroke="#D16262" stroke-opacity="0.5" stroke-width="22"/>
         </svg>
 
         <svg width="149" height="149" class="background-ring" style="left: 10%; top: 80%"  viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="74.5" cy="74.5" r="63.5" stroke="#6BB3E8" stroke-opacity="0.3" stroke-width="22"/>
+          <circle cx="74.5" cy="74.5" r="63.5" stroke="#6BB3E8" stroke-opacity="0.5" stroke-width="22"/>
         </svg>
 
         <svg width="149" height="149" class="background-ring" style="right: 10%; top: 60%"  viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="74.5" cy="74.5" r="63.5" stroke="#7C79ED" stroke-opacity="0.3" stroke-width="22"/>
+          <circle cx="74.5" cy="74.5" r="63.5" stroke="#7C79ED" stroke-opacity="0.5" stroke-width="22"/>
         </svg>
 
         <svg width="149" height="149" class="background-ring" style="left: 45%; top: 2%"  viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="74.5" cy="74.5" r="63.5" stroke="#F5DF67" stroke-opacity="0.3" stroke-width="22"/>
+          <circle cx="74.5" cy="74.5" r="63.5" stroke="#F5DF67" stroke-opacity="0.5" stroke-width="22"/>
         </svg>
 
       </div>
@@ -131,9 +131,11 @@
           </filter>
         </defs>
       </svg>
+
       </div>
         Add an account
     </div>
+
   </div>
 </template>
 

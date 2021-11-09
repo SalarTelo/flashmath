@@ -1,6 +1,39 @@
 <template>
   <div class="background">
 
+
+    <div class="rings-container">
+
+      <svg width="149" height="149" class="background-ring"  style="left: 15%; top: 20%" viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="74.5" cy="74.5" r="63.5" stroke="#7C79ED" stroke-opacity="0.7" stroke-width="22"/>
+      </svg>
+
+      <svg width="149" height="149" class="background-ring" style="left: 90%; top: 10%"  viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="74.5" cy="74.5" r="63.5" stroke="#A68ECD" stroke-opacity="0.7" stroke-width="22"/>
+      </svg>
+
+      <svg width="149" height="149" class="background-ring" style="left: 10%; top: 80%"  viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="74.5" cy="74.5" r="63.5" stroke="#4DAFCE" stroke-opacity="0.7" stroke-width="22"/>
+      </svg>
+
+      <svg width="149" height="149" class="background-ring" style="right: 10%; top: 60%"  viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="74.5" cy="74.5" r="63.5" stroke="purple" stroke-opacity="0.7" stroke-width="22"/>
+      </svg>
+
+      <svg width="149" height="149" class="background-ring" style="left: 30%; top: 2%"  viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="74.5" cy="74.5" r="63.5" stroke="#F5DF67" stroke-opacity="0.7" stroke-width="22"/>
+      </svg>
+
+      <svg width="149" height="149" class="background-ring" style="left: 60%; top: 15%"  viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="74.5" cy="74.5" r="63.5" stroke="pink" stroke-opacity="0.7" stroke-width="22"/>
+      </svg>
+
+      <svg width="169" height="169" class="background-ring" style="right: 70%; top: 60%"  viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="74.5" cy="74.5" r="63.5" stroke="lightgreen" stroke-opacity="0.7" stroke-width="22"/>
+      </svg>
+
+    </div>
+
     <div class="question-box" v-bind:class="{ 'answer-correct': state===1, 'answer-incorrect':  state===2}">
       <div class="question-counter">
         #{{ currentQuestion.index + 1 }}
@@ -157,13 +190,15 @@ export default {
 
 .background {
   align-items: center;
-  background-color: #596EB8;
+
+  background: #F4E072;
   display: flex;
   height: 100%;
   justify-content: center;
   flex-direction: column;
-}
+  position: relative;
 
+}
 .question-box {
   border-radius: 40px;
   background-color: #62B6D1;
@@ -215,6 +250,17 @@ export default {
   align-items: center;
 
   user-select: none;
+}
+
+.top-left-figure {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.bottom-right-figure {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 .button {
@@ -289,6 +335,10 @@ export default {
   align-items: center;
   justify-content: center;
   margin-top: 50px;
+}
+
+.background-ring{
+  position: absolute;
 }
 
 </style>
