@@ -1,5 +1,6 @@
 <template>
   <div class="background">
+
     <div class="question-box" v-bind:class="{ 'answer-correct': state===1, 'answer-incorrect':  state===2}">
       <div class="question-counter">
         #{{ currentQuestion.index + 1 }}
@@ -133,7 +134,6 @@ export default {
       else
         this.onInCorrect();
     }
-
   },
   mounted() {
     this.updateQuestion();
