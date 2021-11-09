@@ -1,23 +1,23 @@
 <template>
   <div id="app">
 
-    <!--Game></Game-->
-    <operatorpage></operatorpage>
+    <Game></Game>
+    <!--operatorpage></operatorpage-->
   </div>
 </template>
 
 <script>
 
-/*import Game from '@/components/Game.vue';*/
-import operatorpage from "@/components/operatorpage";
+import Game from '@/components/Game.vue';
+/*import operatorpage from "@/components/operatorpage";*/
 
 
 export default {
   name: 'App',
 
   components: {
-    operatorpage,
-    /*Game*/
+    /*operatorpage*/
+    Game
 
   }
 }

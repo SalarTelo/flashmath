@@ -157,7 +157,7 @@ export default {
 
 .background {
   align-items: center;
-  background-color: #f1b9a1;
+  background-color: #596EB8;
   display: flex;
   height: 100%;
   justify-content: center;
@@ -166,7 +166,7 @@ export default {
 
 .question-box {
   border-radius: 40px;
-  background-color: white;
+  background-color: #62B6D1;
   display: flex;
   flex-direction: column;
   height: 465px;
