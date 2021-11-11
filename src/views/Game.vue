@@ -1,48 +1,50 @@
 <template>
-  <div class="background">
-
+  <div class="background page">
 
     <div class="rings-container">
 
       <svg width="149" height="149" class="background-ring"  style="left: 15%; top: 20%" viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="74.5" cy="74.5" r="63.5" stroke="#7C79ED" stroke-opacity="0.7" stroke-width="22"/>
       </svg>
-
       <svg width="149" height="149" class="background-ring" style="left: 90%; top: 10%"  viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="74.5" cy="74.5" r="63.5" stroke="#A68ECD" stroke-opacity="0.7" stroke-width="22"/>
       </svg>
-
       <svg width="149" height="149" class="background-ring" style="left: 10%; top: 80%"  viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="74.5" cy="74.5" r="63.5" stroke="#4DAFCE" stroke-opacity="0.7" stroke-width="22"/>
       </svg>
-
       <svg width="149" height="149" class="background-ring" style="right: 10%; top: 60%"  viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="74.5" cy="74.5" r="63.5" stroke="purple" stroke-opacity="0.7" stroke-width="22"/>
       </svg>
-
       <svg width="149" height="149" class="background-ring" style="left: 30%; top: 2%"  viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="74.5" cy="74.5" r="63.5" stroke="#F5DF67" stroke-opacity="0.7" stroke-width="22"/>
       </svg>
-
       <svg width="149" height="149" class="background-ring" style="left: 60%; top: 15%"  viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="74.5" cy="74.5" r="63.5" stroke="pink" stroke-opacity="0.7" stroke-width="22"/>
       </svg>
-
       <svg width="169" height="169" class="background-ring" style="right: 70%; top: 60%"  viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="74.5" cy="74.5" r="63.5" stroke="lightgreen" stroke-opacity="0.7" stroke-width="22"/>
       </svg>
 
     </div>
 
-    <div class="question-box" v-bind:class="{ 'answer-correct': state===1, 'answer-incorrect':  state===2}">
-      <div class="question-counter">
-        #{{ currentQuestion.index + 1 }}
-      </div>
-      <div class="question-section">
-        {{ currentQuestion.question }}=?
+    <div class="flip-card">
+      <div class="flip-card-inner" v-bind:class="{'question-answered' : state !== 0}">
+        <div class="flip-card-front" style="color: #656565; text-shadow: 0 5px 5px rgba(0, 0, 0, 0.25);">
+          <div class="question-counter">
+            #{{ currentQuestion.index + 1 }}
+          </div>
+          <div class="question-section" style="margin-top: -9%;">
+            {{ currentQuestion.question }}=?
+          </div>
+        </div>
+        <div class="flip-card-back" style="text-shadow: 0 5px 5px rgba(0, 0, 0, 0.25);"
+             v-bind:class="{ 'question-answered' : state !== 0, 'answer-correct': state===1, 'answer-incorrect':  state===2}">
+          <div class="question-section" style="color: white" v-if="state !== 0">
+            Svar: {{ currentQuestion.answer }}
+          </div>
+        </div>
       </div>
     </div>
-
     <div class="answer-boxes">
       <div class="upper-box">
         <div class="button  red-button" v-on:click="button1Click">
@@ -169,16 +171,8 @@ export default {
     }
   },
   mounted() {
+    console.log("GAME");
     this.updateQuestion();
-    fetch('http://127.0.0.1:8080/content/')
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          console.log(data.bok);
-          this.database.question = data.question;
-          this.database.answer = data.answer;
-        });
   }
 
 }
@@ -187,34 +181,62 @@ export default {
 
 <style scoped>
 
+.question-answered {
+  transform: rotateY(-180deg);
+}
+
 
 .background {
-  align-items: center;
-
-  background: #F4E072;
+  background-color: #f1b9a1;
   display: flex;
   height: 100%;
+
   justify-content: center;
-  flex-direction: column;
+  align-items: center;
   position: relative;
-
-}
-.question-box {
-  border-radius: 40px;
-  background-color: #62B6D1;
-  display: flex;
   flex-direction: column;
-  height: 465px;
-  width: 870px;
+}
 
-  box-shadow: 0 2px 40px 5px rgba(0, 0, 0, 0.25);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
-
+.flip-card {
   user-select: none;
+  background-color: transparent;
+  width: 870px;
+  height: 465px;
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+
 }
 
 
-/* TEMPORARY */
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  border-radius: 22px;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  box-shadow: 0 2px 40px 5px rgba(0, 0, 0, 0.25);
+
+}
+
+.flip-card-front {
+  background-color: #ffffff;
+  color: black;
+}
+
+.flip-card-back {
+  background-color: #ffffff;
+  transform: rotateY(180deg);
+}
+
+
 .answer-correct {
   background-color: #69EE7E;
 }
@@ -234,7 +256,6 @@ export default {
   font-family: "Comic Sans MS", sans-serif;
   font-size: 144px;
   font-weight: bold;
-  color: #656565;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -250,17 +271,6 @@ export default {
   align-items: center;
 
   user-select: none;
-}
-
-.top-left-figure {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-.bottom-right-figure {
-  position: absolute;
-  bottom: 0;
-  right: 0;
 }
 
 .button {
@@ -339,6 +349,80 @@ export default {
 
 .background-ring{
   position: absolute;
+}
+
+@media only screen and (max-width: 375px) {
+
+  .question-box {
+    border-radius: 40px;
+    height: 180px;
+    width: 350px;
+  }
+
+  .question-section {
+    font-size: 65px;
+  }
+
+  .button {
+    border-radius: 22px;
+    height: 53px;
+    width: 200px;
+    font-size: 32px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .answer-boxes {
+    flex-direction: column;
+  }
+
+  .upper-box {
+    flex-direction: column;
+    margin: 20px 0 10px;
+  }
+
+  .lower-box {
+    flex-direction: column;
+    margin: 0;
+  }
+}
+@media only screen and (min-width: 376px) and (max-width: 767px) {
+
+  .flip-card {
+    border-radius: 40px;
+    height: 200px;
+    width: 370px;
+  }
+  .question-section {
+    font-size: 65px;
+  }
+  .button {
+    border-radius: 22px;
+    height: 60px;
+    width: 180px;
+    font-size: 32px;
+    margin: 10px;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 1024px){
+
+  .flip-card {
+    border-radius: 35px;
+    height: 400px;
+    width: 700px;
+  }
+  .question-section {
+    font-size: 150px;
+  }
+  .button{
+    border-radius: 20px;
+    height: 90px;
+    width: 290px;
+
+    margin-left: 47px;
+    margin-right: 47px;
+  }
+
 }
 
 </style>

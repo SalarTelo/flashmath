@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container page" >
 
     <div class="background-visuals">
 
@@ -8,28 +8,28 @@
       </svg>
 
       <svg width="597" height="422" class="top-left-figure" viewBox="0 0 597 422" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M-163.124 353C-40.7237 112.2 394.21 -11 596.376 -42.5C493.876 -56.3333 285.976 -84.8 274.376 -88C262.776 -91.2 -6.45708 -106 -139.624 -113C-198.457 142.667 -285.524 593.8 -163.124 353Z" fill="#A68ECD"/>
+        <path d="M-163.124 353C-40.7237 112.2 394.21 -11 596.376 -42.5C493.876 -56.3333 285.976 -84.8 274.376 -88C262.776 -91.2 -6.45708 -106 -139.624 -113C-198.457 142.667 -285.524 593.8 -163.124 353Z" fill="#BAD162"/>
       </svg>
 
       <div class="rings-container">
         <svg width="149" height="149" class="background-ring" style="left: 25%; top: 20%" viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="74.5" cy="74.5" r="63.5" stroke="#7C79ED" stroke-opacity="0.5" stroke-width="22"/>
+          <circle cx="74.5" cy="74.5" r="63.5" stroke="#7C79ED" stroke-opacity="0.3" stroke-width="22"/>
         </svg>
 
         <svg width="149" height="149" class="background-ring" style="left: 80%; top: 10%"  viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="74.5" cy="74.5" r="63.5" stroke="#D16262" stroke-opacity="0.5" stroke-width="22"/>
+          <circle cx="74.5" cy="74.5" r="63.5" stroke="#D16262" stroke-opacity="0.3" stroke-width="22"/>
         </svg>
 
         <svg width="149" height="149" class="background-ring" style="left: 10%; top: 80%"  viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="74.5" cy="74.5" r="63.5" stroke="#6BB3E8" stroke-opacity="0.5" stroke-width="22"/>
+          <circle cx="74.5" cy="74.5" r="63.5" stroke="#6BB3E8" stroke-opacity="0.3" stroke-width="22"/>
         </svg>
 
         <svg width="149" height="149" class="background-ring" style="right: 10%; top: 60%"  viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="74.5" cy="74.5" r="63.5" stroke="#7C79ED" stroke-opacity="0.5" stroke-width="22"/>
+          <circle cx="74.5" cy="74.5" r="63.5" stroke="#7C79ED" stroke-opacity="0.3" stroke-width="22"/>
         </svg>
 
         <svg width="149" height="149" class="background-ring" style="left: 45%; top: 2%"  viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="74.5" cy="74.5" r="63.5" stroke="#F5DF67" stroke-opacity="0.5" stroke-width="22"/>
+          <circle cx="74.5" cy="74.5" r="63.5" stroke="#F5DF67" stroke-opacity="0.3" stroke-width="22"/>
         </svg>
 
       </div>
@@ -37,8 +37,10 @@
 
     <div class="content-container">
 
-      <div class="user-container">
-        <img v-bind:src="donkey" class="button"  alt="donkey">
+      <div  class="user-container">
+        <router-link  class="user-container" @click.native="test" to="/operator">
+          <img v-bind:src="donkey" class="button"  alt="donkey">
+        </router-link >
         <div class="user-heart-container">
           <svg  viewBox="0 0 91 80" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_d_40:10)">
@@ -60,9 +62,12 @@
           <div class="heart-text">x</div>
         </div>
         <div class="button-text">User 1</div>
-      </div>
-      <div class="user-container">
-        <img v-bind:src="dino" class="button"  alt="donkey">
+      </div >
+
+      <div  class="user-container">
+        <router-link  class="user-container"  to="/quiz">
+          <img v-bind:src="dino" class="button"  alt="donkey">
+        </router-link >
         <div class="user-heart-container">
           <svg  viewBox="0 0 91 80" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_d_40:10)">
@@ -84,31 +89,37 @@
           <div class="heart-text">x</div>
         </div>
         <div class="button-text">User 2</div>
-      </div>
-      <div class="user-container">
-        <img v-bind:src="penguin" class="button"  alt="donkey">
+      </div >
+
+      <div  class="user-container">
+        <router-link  class="user-container"  to="/quiz">
+          <img v-bind:src="penguin" class="button"  alt="donkey">
+        </router-link >
         <div class="user-heart-container">
           <svg  viewBox="0 0 91 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g filter="url(#filter0_d_40:10)">
-            <path d="M46.7297 4.81173C-24.6648 -17.9456 6.23697 45.9916 46.7294 72C85.0909 47.0753 113.862 -16.862 46.7297 4.81173Z" fill="#CE4D4D"/>
-          </g>
-          <defs>
-            <filter id="filter0_d_40:10" x="0" y="0" width="91" height="80" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-              <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-              <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-              <feOffset dy="4"/>
-              <feGaussianBlur stdDeviation="2"/>
-              <feComposite in2="hardAlpha" operator="out"/>
-              <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
-              <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_40:10"/>
-              <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_40:10" result="shape"/>
-            </filter>
-          </defs>
-        </svg>
+            <g filter="url(#filter0_d_40:10)">
+              <path d="M46.7297 4.81173C-24.6648 -17.9456 6.23697 45.9916 46.7294 72C85.0909 47.0753 113.862 -16.862 46.7297 4.81173Z" fill="#CE4D4D"/>
+            </g>
+            <defs>
+              <filter id="filter0_d_40:10" x="0" y="0" width="91" height="80" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                <feOffset dy="4"/>
+                <feGaussianBlur stdDeviation="2"/>
+                <feComposite in2="hardAlpha" operator="out"/>
+                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_40:10"/>
+                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_40:10" result="shape"/>
+              </filter>
+            </defs>
+          </svg>
           <div class="heart-text">x</div>
         </div>
         <div class="button-text">User 3</div>
-      </div>
+      </div >
+
+
+
     </div>
 
     <div class="account-settings">
@@ -131,11 +142,9 @@
           </filter>
         </defs>
       </svg>
-
       </div>
         Add an account
     </div>
-
   </div>
 </template>
 
@@ -146,9 +155,14 @@ export default {
 
     //THIS IS STUPID
     return{
-      donkey: require('@/../assets/img/edited/donkeh.png'),
-      penguin: require('@/../assets/img/edited/penguin.png'),
-      dino: require('@/../assets/img/edited/dino.png')
+      donkey: require('@/assets/img/edited/donkeh.png'),
+      penguin: require('@/assets/img/edited/penguin.png'),
+      dino: require('@/assets/img/edited/dino.png')
+    }
+  },
+  methods: {
+    test() {
+      console.log("test");
     }
   }
 }
@@ -169,8 +183,7 @@ export default {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  width: 80%;
-  height: 30%;
+
 }
 
 .button{
@@ -203,9 +216,8 @@ export default {
 
 .user-heart-container {
   position: absolute;
-
-  right: -15%;
-  top: -6%;
+  right: 0;
+  top: 0;
   width:91px;
   height:80px;
   cursor: pointer;
@@ -239,6 +251,8 @@ export default {
 
 .user-container {
   position: relative;
+  text-decoration: none;
+  padding: 20px;
 }
 .top-left-figure {
   position: absolute;
