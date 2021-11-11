@@ -3,25 +3,32 @@
 
     <div class="rings-container">
 
-      <svg width="149" height="149" class="background-ring"  style="left: 15%; top: 20%" viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="149" height="149" class="background-ring" style="left: 15%; top: 20%" viewBox="0 0 149 149"
+           fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="74.5" cy="74.5" r="63.5" stroke="#7C79ED" stroke-opacity="0.7" stroke-width="22"/>
       </svg>
-      <svg width="149" height="149" class="background-ring" style="left: 90%; top: 10%"  viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="149" height="149" class="background-ring" style="left: 90%; top: 10%" viewBox="0 0 149 149"
+           fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="74.5" cy="74.5" r="63.5" stroke="#A68ECD" stroke-opacity="0.7" stroke-width="22"/>
       </svg>
-      <svg width="149" height="149" class="background-ring" style="left: 10%; top: 80%"  viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="149" height="149" class="background-ring" style="left: 10%; top: 80%" viewBox="0 0 149 149"
+           fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="74.5" cy="74.5" r="63.5" stroke="#4DAFCE" stroke-opacity="0.7" stroke-width="22"/>
       </svg>
-      <svg width="149" height="149" class="background-ring" style="right: 10%; top: 60%"  viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="149" height="149" class="background-ring" style="right: 10%; top: 60%" viewBox="0 0 149 149"
+           fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="74.5" cy="74.5" r="63.5" stroke="purple" stroke-opacity="0.7" stroke-width="22"/>
       </svg>
-      <svg width="149" height="149" class="background-ring" style="left: 30%; top: 2%"  viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="149" height="149" class="background-ring" style="left: 30%; top: 2%" viewBox="0 0 149 149" fill="none"
+           xmlns="http://www.w3.org/2000/svg">
         <circle cx="74.5" cy="74.5" r="63.5" stroke="#F5DF67" stroke-opacity="0.7" stroke-width="22"/>
       </svg>
-      <svg width="149" height="149" class="background-ring" style="left: 60%; top: 15%"  viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="149" height="149" class="background-ring" style="left: 60%; top: 15%" viewBox="0 0 149 149"
+           fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="74.5" cy="74.5" r="63.5" stroke="pink" stroke-opacity="0.7" stroke-width="22"/>
       </svg>
-      <svg width="169" height="169" class="background-ring" style="right: 70%; top: 60%"  viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="169" height="169" class="background-ring" style="right: 70%; top: 60%" viewBox="0 0 149 149"
+           fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="74.5" cy="74.5" r="63.5" stroke="lightgreen" stroke-opacity="0.7" stroke-width="22"/>
       </svg>
 
@@ -31,7 +38,7 @@
       <div class="flip-card-inner" v-bind:class="{'question-answered' : state !== 0}">
         <div class="flip-card-front" style="color: #656565; text-shadow: 0 5px 5px rgba(0, 0, 0, 0.25);">
           <div class="question-counter">
-            #{{ currentQuestion.index + 1 }}
+            #{{ currentQuestion.id + 1 }}
           </div>
           <div class="question-section" style="margin-top: -9%;">
             {{ currentQuestion.question }}=?
@@ -47,20 +54,20 @@
     </div>
     <div class="answer-boxes">
       <div class="upper-box">
-        <div class="button  red-button" v-on:click="button1Click">
+        <div class="button  red-button" v-on:click="buttonClick(0)">
           {{ buttonData[0] }}
         </div>
-        <div class="button green-button" v-on:click="button2Click">
+        <div class="button green-button" v-on:click="buttonClick(1)">
           {{ buttonData[1] }}
         </div>
 
       </div>
       <div class="lower-box">
 
-        <div class="button blue-button" v-on:click="button3Click">
+        <div class="button blue-button" v-on:click="buttonClick(2)">
           {{ buttonData[2] }}
         </div>
-        <div class="button yellow-button" v-on:click="button4Click">
+        <div class="button yellow-button" v-on:click="buttonClick(3)">
           {{ buttonData[3] }}
         </div>
       </div>
@@ -77,18 +84,18 @@
 export default {
 
   name: "Game",
+  computed:{
+    getAllQuestions(){
+      return JSON.parse(JSON.stringify(this.$store.getters.allQuestions))
+    },
+
+  },
   data() {
     return {
-      database: [
-        {question: "2+2", answer: "4"},
-        {question: "1+3", answer: "4"},
-        {question: "2+5", answer: "7"},
-        {question: "6+2", answer: "8"}
-      ],
       currentQuestion: {
-        index: 0,
-        question: '2+2',
-        answer: '4'
+        id: 0,
+        question: 'No questions available',
+        answer: '-1'
       },
       buttonData: [
         0,
@@ -100,19 +107,19 @@ export default {
     }
   },
   methods: {
-    updateQuestion() {
 
+    updateQuestion() {
+      this.database = this.getAllQuestions;
       //Get a random number between 0 and size of the question-database
       let questionIndex = Math.floor(Math.random() * this.database.length)
-
       //Set the current questions values.
       this.currentQuestion.question = this.database[questionIndex].question;
       this.currentQuestion.answer = this.database[questionIndex].answer;
+      this.currentQuestion.id = this.database[questionIndex].id;
 
       //Get a random button to display the real answer
       let randomButtonIndex = Math.floor(Math.random() * 4);
       this.currentQuestion.index = randomButtonIndex;
-
       for (let i = 0; i < 4; i++) {
 
         //If the current index = the random button that is supposed to display the REAL answer
@@ -140,41 +147,22 @@ export default {
       this.state = 1;
       this.onAnswer();
     },
-    onInCorrect() {
+    onIncorrect() {
       this.state = 2;
       this.onAnswer();
     },
-
-    button1Click() {
-      if (this.currentQuestion.index === 0)
-        this.onCorrect();
-      else
-        this.onInCorrect();
+    buttonClick(index) {
+      if (this.state === 0) {
+        if (this.currentQuestion.index === index)
+          this.onCorrect();
+        else
+          this.onIncorrect();
+      }
     },
-    button2Click() {
-      if (this.currentQuestion.index === 1)
-        this.onCorrect();
-      else
-        this.onInCorrect();
-    },
-    button3Click() {
-      if (this.currentQuestion.index === 2)
-        this.onCorrect();
-      else
-        this.onInCorrect();
-    },
-    button4Click() {
-      if (this.currentQuestion.index === 3)
-        this.onCorrect();
-      else
-        this.onInCorrect();
-    }
   },
-  mounted() {
-    console.log("GAME");
-    this.updateQuestion();
+  async mounted() {
+    this.updateQuestion()
   }
-
 }
 
 </script>
@@ -203,6 +191,7 @@ export default {
   width: 870px;
   height: 465px;
   perspective: 1000px;
+  z-index: 1;
 }
 
 .flip-card-inner {
@@ -301,7 +290,7 @@ export default {
 
   box-shadow: 0 2px 40px 5px rgba(0, 0, 0, 0.25);
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
-
+  z-index: 1;
 }
 
 .button:hover {
@@ -347,8 +336,9 @@ export default {
   margin-top: 50px;
 }
 
-.background-ring{
+.background-ring {
   position: absolute;
+  z-index: 0;
 }
 
 @media only screen and (max-width: 375px) {
@@ -386,6 +376,7 @@ export default {
     margin: 0;
   }
 }
+
 @media only screen and (min-width: 376px) and (max-width: 767px) {
 
   .flip-card {
@@ -393,9 +384,11 @@ export default {
     height: 200px;
     width: 370px;
   }
+
   .question-section {
     font-size: 65px;
   }
+
   .button {
     border-radius: 22px;
     height: 60px;
@@ -404,17 +397,20 @@ export default {
     margin: 10px;
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px){
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
 
   .flip-card {
     border-radius: 35px;
     height: 400px;
     width: 700px;
   }
+
   .question-section {
     font-size: 150px;
   }
-  .button{
+
+  .button {
     border-radius: 20px;
     height: 90px;
     width: 290px;
