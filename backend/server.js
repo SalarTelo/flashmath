@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require('cors');
-const db = require("./database.js");
+const {questionDb, subuserDb} = require("./database.js");
 
 app.use(cors());
 app.use(express.static('public'));
@@ -20,7 +20,7 @@ app.listen(HTTP_PORT, () => {
 app.get("/content", (req, res, next) => {
     let sql = "select * from flashmath"
     let params = []
-    db.all(sql, params, (err, rows) => {
+    questionDb.all(sql, params, (err, rows) => {
         if (err) {
             res.status(400).json({"error": err.message});
             return;
@@ -32,11 +32,26 @@ app.get("/content", (req, res, next) => {
     });
 });
 
+app.get("/users", (req, res, next) => {
+    let sql = "select * from subusers"
+    let params = []
+    subuserDb.all(sql, params, (err, rows) => {
+        if (err) {
+            res.status(400).json({"error": err.message});
+            return;
+        }
+        res.json({
+            "message": "success",
+            "sub-users": rows
+        })
+    });
+});
+
 
 app.get("/content/:id", (req, res, next) => {
     let sql = "select * from flashmath where questionId = ?"
     let params = [req.params.id]
-    db.get(sql, params, (err, row) => {
+    questionDB.get(sql, params, (err, row) => {
         if (err) {
             res.status(400).json({"error": err.message});
             return;
@@ -51,11 +66,12 @@ app.get("/content/:id", (req, res, next) => {
 app.post("/content/", (req, res, next) => {
     let data = {
         question: req.body.question,
-        answer: req.body.answer
+        answer: req.body.answer,
+        category: req.body.category
     }
-    let sql = 'INSERT INTO flashmath (question, answer) VALUES (?,?)'
-    let params = [data.question, data.answer]
-    db.run(sql, params, function (err, result) {
+    let sql = 'INSERT INTO flashmath (question, answer, category) VALUES (?,?,?)'
+    let params = [data.question, data.answer, data.category]
+    questionDB.run(sql, params, function (err, result) {
         if (err) {
             res.status(400).json({"error": err.message})
             return;
@@ -69,7 +85,7 @@ app.post("/content/", (req, res, next) => {
 })
 
 app.delete("/content/:id", (req, res, next) => {
-    db.run(
+    questionDB.run(
         'DELETE FROM flashmath WHERE questionId = ?',
         req.params.id,
         function (err, result) {
