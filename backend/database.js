@@ -11,7 +11,7 @@ let questionDb = new sqlite3.Database(DBSOURCE, (err) => {
     } else {
         console.log('Connected to the SQlite database.')
         questionDb.run(`CREATE TABLE flashmath (
-            questionId INTEGER PRIMARY KEY,
+            id INTEGER PRIMARY KEY,
             question TEXT,
             answer INT,
             category INT
@@ -20,8 +20,13 @@ let questionDb = new sqlite3.Database(DBSOURCE, (err) => {
                 console.log(err)
             } else {
                 console.log("Table just created, creating some rows")
-                let insert = 'INSERT INTO flashmath (question, answer) VALUES (?,?)'
-                questionDb.run(insert, ["2+2", 4])
+                let insert = 'INSERT INTO flashmath (question, answer, category) VALUES (?,?,?)'
+                questionDb.run(insert, ["2+2", 4, 0])
+                questionDb.run(insert, ["2+3", 5, 0])
+                questionDb.run(insert, ["2+4", 6, 0])
+                questionDb.run(insert, ["2-1", 1, 1])
+                questionDb.run(insert, ["3-1", 2, 1])
+                questionDb.run(insert, ["4-1", 3, 1])
             }
         })
     }

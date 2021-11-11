@@ -38,7 +38,7 @@
     <div class="content-container">
 
       <div  class="user-container">
-        <router-link  class="user-container" @click.native="test" to="/operator">
+        <router-link  class="user-container" to="/operator">
           <img v-bind:src="donkey" class="button"  alt="donkey">
         </router-link >
         <div class="user-heart-container">
@@ -161,9 +161,7 @@ export default {
     }
   },
   methods: {
-    test() {
-      console.log("test");
-    }
+
   }
 }
 </script>
