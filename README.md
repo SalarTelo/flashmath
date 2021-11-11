@@ -1,4 +1,4 @@
-# flashmath
+# flashmath_dev
 
 ## Project setup
 ```
