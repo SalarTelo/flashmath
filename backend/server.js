@@ -118,7 +118,7 @@ app.post("/users/", (req, res, next) => {
     userTable.run(sql, params, function (err, result) {
         if (err) {
             res.status(400).json({"error": err.message})
-            return;
+            return err;
         }
         res.json({
             "message": "success",

@@ -11,17 +11,14 @@ const ul = document.getElementById('questions');
 
 fetch(url)
     .then((resp) => resp.json())
-    .then(function(data) {
-        console.log(data.flashmath);
-        console.log("Visa första i json-objektet: ");
-
+    .then(function (data) {
         let content = data.flashmath;
-        return content.map(function(content) {
+        return content.map(function (content) {
             let li = createNode('li');
-            li.innerHTML = content.question + " ==> " + content.answer;
+            li.innerHTML = content.question + " ==> " + content.answer + " ==> category ==> " + content.category;
             append(ul, li);
         })
     })
-    .catch(function(error) {
+    .catch(function (error) {
         console.log(error);
     });
