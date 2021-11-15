@@ -120,9 +120,9 @@
     </div>
 
     <div class="account-settings">
-      <div>
-        <div style="position: absolute; left: -18%; bottom: 13%; color: white; z-index: 99; ">+</div>
-        <svg  style="height: 90px; width: 80px; position: absolute; left: -25%; bottom: -20%" viewBox="0 0 91 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <div class="heart">
+        <div  class="a" style="position: absolute; left: -18%; bottom: 13%; color: white; z-index: 99; ">+</div>
+        <svg  class="b" style="height: 90px; width: 80px; position: absolute; left: -25%; bottom: -20%" viewBox="0 0 91 80" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g filter="url(#filter0_d_40:10)">
           <path d="M46.7297 4.81173C-24.6648 -17.9456 6.23697 45.9916 46.7294 72C85.0909 47.0753 113.862 -16.862 46.7297 4.81173Z" fill="#CE4D4D"/>
         </g>
@@ -216,21 +216,17 @@ export default {
   transition: 0.1s;
   user-select: none;
 }
-
 .user-heart-container:hover{
   width:100px;
   height:90px;
 }
-
 .user-heart-container:active{
   width:110px;
   height:100px;
 }
-
 .user-heart-container:hover .heart-text{
   top: -1%;
 }
-
 .heart-text{
   transition: 0.1s;
   font-size: 45px;
@@ -240,7 +236,6 @@ export default {
   top: -10%;
   right: 35%;
 }
-
 .user-container {
   position: relative;
   text-decoration: none;
@@ -256,23 +251,17 @@ export default {
   bottom: 0;
   right: 0;
 }
-
 .account-settings {
   font-size: 48px;
   font-weight: bold;
   color: #686868;
   user-select: none;
-
-
   position: absolute;
   bottom: 10%;
-
   transition: font-size 0.1s;
-
   cursor: pointer;
   text-shadow: 0 4px 7px rgba(0, 0, 0, 0.25);
 }
-
 .account-settings:hover{
   font-size: 50px;
 }
@@ -280,17 +269,16 @@ export default {
   transition: font-size 0.02s;
   font-size: 55px;
 }
-
 .background-ring {
   position: absolute;
 }
-
 @media only screen and (max-width: 375px) {
-  .content-container{
+
+   .content-container{
     display: flex;
     flex-direction: column;
-    padding-bottom: 10px;
-    margin-top: 10px;
+    /*padding-bottom: 5px;*/
+    /*margin-top: 5px;*/
   }
   .button{
     width: 100px;
@@ -305,37 +293,58 @@ export default {
     font-size: 20px;
   }
   .user-heart-container {
-    width:50px;
-    height:40px;
+    width:40px;
+    height:30px;
+    right: 10%;
+    top:3%;
    }
   .user-heart-container:hover{
     width:50px;
     height:40px;
   }
   .user-heart-container:active{
-    width:80px;
-    height:70px;
+    width:30px;
+    height:30px;
+    position: absolute;
   }
   .heart-text{
     font-size: 25px;
-    top: -7%;
-    right: 28%;
+    top: -25%;
+    right: 30%;
   }
   .background-ring {
-    display: none;
+    /*display: none;*/
   }
   .top-left-figure {
     top: -10%;
-
+  }
+  .bottom-right-figure {
+    bottom: -12%;
   }
   .account-settings {
-    font-size: 30px;
-    user-select: none;
+    bottom: 5%;
+    font-size: 20px;
+  }
+  .account-settings:active{
+    transition: font-size 0.02s;
+    font-size: 40px;
     position: absolute;
-    bottom: 10%;
+  }
+  .heart .b{
+    height: 30px;
+    width: 20px;
+    position: relative;
+    left: -25%;
+    bottom: -20%;
+  }
+  .heart .a{
+    left: -20%;
+    bottom: -20%;
+    font-size: 40px;
+    padding-top: 0;
+    padding-bottom:0;
 
   }
-
 
 }
 
