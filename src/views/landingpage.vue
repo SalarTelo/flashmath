@@ -37,11 +37,11 @@
 
     <div class="content-container">
 
-      <div  class="user-container">
-        <router-link  class="user-container" @click.native="test" to="/operator">
-          <img v-bind:src="donkey" class="button"  alt="donkey">
+      <div :key="user.id" v-for="user in getUsers" class="user-container">
+        <router-link  class="user-container" to="/operator">
+          <img v-bind:src="getUserIcon(user.id)[0]" class="button"  :alt=getUserIcon(user.id)[1]>
         </router-link >
-        <div class="user-heart-container">
+        <div class="user-heart-container" v-on:click="deleteUser(user.id)">
           <svg  viewBox="0 0 91 80" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_d_40:10)">
               <path d="M46.7297 4.81173C-24.6648 -17.9456 6.23697 45.9916 46.7294 72C85.0909 47.0753 113.862 -16.862 46.7297 4.81173Z" fill="#CE4D4D"/>
@@ -61,61 +61,7 @@
           </svg>
           <div class="heart-text">x</div>
         </div>
-        <div class="button-text">User 1</div>
-      </div >
-
-      <div  class="user-container">
-        <router-link  class="user-container"  to="/quiz">
-          <img v-bind:src="dino" class="button"  alt="donkey">
-        </router-link >
-        <div class="user-heart-container">
-          <svg  viewBox="0 0 91 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g filter="url(#filter0_d_40:10)">
-              <path d="M46.7297 4.81173C-24.6648 -17.9456 6.23697 45.9916 46.7294 72C85.0909 47.0753 113.862 -16.862 46.7297 4.81173Z" fill="#CE4D4D"/>
-            </g>
-            <defs>
-              <filter id="filter0_d_40:10" x="0" y="0" width="91" height="80" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-                <feOffset dy="4"/>
-                <feGaussianBlur stdDeviation="2"/>
-                <feComposite in2="hardAlpha" operator="out"/>
-                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
-                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_40:10"/>
-                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_40:10" result="shape"/>
-              </filter>
-            </defs>
-          </svg>
-          <div class="heart-text">x</div>
-        </div>
-        <div class="button-text">User 2</div>
-      </div >
-
-      <div  class="user-container">
-        <router-link  class="user-container"  to="/quiz">
-          <img v-bind:src="penguin" class="button"  alt="donkey">
-        </router-link >
-        <div class="user-heart-container">
-          <svg  viewBox="0 0 91 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g filter="url(#filter0_d_40:10)">
-              <path d="M46.7297 4.81173C-24.6648 -17.9456 6.23697 45.9916 46.7294 72C85.0909 47.0753 113.862 -16.862 46.7297 4.81173Z" fill="#CE4D4D"/>
-            </g>
-            <defs>
-              <filter id="filter0_d_40:10" x="0" y="0" width="91" height="80" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-                <feOffset dy="4"/>
-                <feGaussianBlur stdDeviation="2"/>
-                <feComposite in2="hardAlpha" operator="out"/>
-                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
-                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_40:10"/>
-                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_40:10" result="shape"/>
-              </filter>
-            </defs>
-          </svg>
-          <div class="heart-text">x</div>
-        </div>
-        <div class="button-text">User 3</div>
+        <div class="button-text">{{user.Name}}</div>
       </div >
 
 
@@ -151,8 +97,13 @@
 <script>
 export default {
   name: "landingpage",
-  data(){
+  computed: {
+    getUsers() {
+      return JSON.parse(JSON.stringify(this.$store.getters.allUsers))
+    },
 
+  },
+  data(){
     //THIS IS STUPID
     return{
       donkey: require('@/assets/img/edited/donkeh.png'),
@@ -161,8 +112,22 @@ export default {
     }
   },
   methods: {
-    test() {
-      console.log("test");
+    getUserIcon(index){
+      index = index -1;
+      if(index < 0 || index >= 3){
+        index = Math.floor(Math.random()*3)
+      }
+      if(index === 0)
+        return [this.donkey, "donkey"];
+      if(index === 1)
+        return [this.penguin, "penguin"];
+      if(index === 2)
+        return [this.dino, "dino"];
+
+      return null;
+    },
+    deleteUser(id){
+      this.$store.dispatch("removeUser", id);
     }
   }
 }
