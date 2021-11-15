@@ -116,10 +116,7 @@
           <div class="heart-text">x</div>
         </div>
         <div class="button-text">User 3</div>
-      </div >
-
-
-
+      </div>
     </div>
 
     <div class="account-settings">
@@ -172,7 +169,6 @@ export default {
 .container {
   height: 100%;
   background-color: #FFBAE6;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -185,20 +181,16 @@ export default {
   align-items: center;
 
 }
-
 .button{
   width: 256px;
   height: 256px;
   background: gray;
   border-radius: 40px;
-
   transition-duration: 0.1s;
-
   cursor: pointer;
   box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
 }
 .button:hover{
-
   width: 280px;
   height: 280px;
 }
@@ -292,4 +284,59 @@ export default {
 .background-ring {
   position: absolute;
 }
+
+@media only screen and (max-width: 375px) {
+  .content-container{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+    margin-top: 10px;
+  }
+  .button{
+    width: 100px;
+    height: 100px;
+   border-radius: 20px;
+    }
+  .button:active{
+    width: 110px;
+    height: 110px;
+  }
+  .button-text{
+    font-size: 20px;
+  }
+  .user-heart-container {
+    width:50px;
+    height:40px;
+   }
+  .user-heart-container:hover{
+    width:50px;
+    height:40px;
+  }
+  .user-heart-container:active{
+    width:80px;
+    height:70px;
+  }
+  .heart-text{
+    font-size: 25px;
+    top: -7%;
+    right: 28%;
+  }
+  .background-ring {
+    display: none;
+  }
+  .top-left-figure {
+    top: -10%;
+
+  }
+  .account-settings {
+    font-size: 30px;
+    user-select: none;
+    position: absolute;
+    bottom: 10%;
+
+  }
+
+
+}
+
 </style>
