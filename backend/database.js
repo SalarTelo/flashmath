@@ -7,7 +7,6 @@ let questionTable = new sqlite3.Database(DB, (err) => {
         console.error(err.message)
         throw err
     } else {
-        console.log('Connected to the SQlite database.')
         questionTable.run(`CREATE TABLE questions (
             id INTEGER PRIMARY KEY,
             question TEXT,
@@ -17,14 +16,17 @@ let questionTable = new sqlite3.Database(DB, (err) => {
             if (err) {
                 console.log(err)
             } else {
-                console.log("Table just created, creating some rows")
                 let insert = 'INSERT INTO questions (question, answer, category) VALUES (?,?,?)'
-                questionTable.run(insert, ["2+2", 4, 0])
-                questionTable.run(insert, ["2+3", 5, 0])
-                questionTable.run(insert, ["2+4", 6, 0])
-                questionTable.run(insert, ["2-1", 1, 1])
-                questionTable.run(insert, ["3-1", 2, 1])
-                questionTable.run(insert, ["4-1", 3, 1])
+
+                for (let i = 0; i < 10; i++){
+                    for (let j = 0; j < 10; j++){
+                        let plusQuiz = i + '+' + j;
+                        let minusQuiz = i + '-' + j;
+                        questionTable.run(insert, [plusQuiz, i+j, 0])
+                        if(i >= j)
+                        questionTable.run(insert, [minusQuiz, i-j, 1])
+                    }
+                }
             }
         })
     }
@@ -34,7 +36,6 @@ let userTable = new sqlite3.Database(DB, (err) => {
         console.error(err.message)
         throw err
     } else {
-        console.log('Connected to the SQlite database.')
         userTable.run(`CREATE TABLE users (
             id INTEGER PRIMARY KEY,
             Name TEXT
@@ -42,7 +43,6 @@ let userTable = new sqlite3.Database(DB, (err) => {
             if (err) {
                 console.log(err)
             } else {
-                console.log("Table just created, creating some rows")
                 let insert = 'INSERT INTO users (Name) VALUES (?)'
                 userTable.run(insert, "Luka")
                 userTable.run(insert, "Salar")

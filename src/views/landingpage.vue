@@ -38,7 +38,7 @@
     <div class="content-container">
 
       <div :key="user.id" v-for="user in getUsers" class="user-container">
-        <router-link  class="user-container" to="/operator">
+        <router-link  class="user-container" @click.native="setCurrentUser(user)" to="/operator">
           <img v-bind:src="getUserIcon(user.id)[0]" class="button"  :alt=getUserIcon(user.id)[1]>
         </router-link >
         <div class="user-heart-container" v-on:click="deleteUser(user.id)">
@@ -112,6 +112,10 @@ export default {
     }
   },
   methods: {
+    setCurrentUser(user){
+      this.$store.dispatch("setCurrentUser", user);
+      console.log(this.$store.state.currentUser);
+    },
     getUserIcon(index){
       index = index -1;
       if(index < 0 || index >= 3){

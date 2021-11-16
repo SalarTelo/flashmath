@@ -39,8 +39,6 @@
       </div>
     </div>
 
-
-
     <div class="content">
       <div class="left-section">
 

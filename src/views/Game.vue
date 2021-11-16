@@ -84,8 +84,8 @@
 export default {
 
   name: "Game",
-  computed:{
-    getAllQuestions(){
+  computed: {
+    getAllQuestions() {
       return JSON.parse(JSON.stringify(this.$store.getters.allQuestions))
     },
 
@@ -93,15 +93,15 @@ export default {
   data() {
     return {
       currentQuestion: {
-        id: 0,
-        question: 'No questions available',
+        id: -1,
+        question: 'NaN',
         answer: '-1'
       },
       buttonData: [
-        0,
-        0,
-        0,
-        0
+        -1,
+        -1,
+        -1,
+        -1
       ],
       state: 0,
     }
@@ -120,6 +120,8 @@ export default {
       //Get a random button to display the real answer
       let randomButtonIndex = Math.floor(Math.random() * 4);
       this.currentQuestion.index = randomButtonIndex;
+
+      let numberList = [-1, -1, -1, -1];
       for (let i = 0; i < 4; i++) {
 
         //If the current index = the random button that is supposed to display the REAL answer
@@ -128,15 +130,24 @@ export default {
           this.buttonData[i] = this.currentQuestion.answer;
         }
 
-            //If the button isn't the button that is supposed to display the REAL answer
+        //If the button isn't the button that is supposed to display the REAL answer
         //Display a random number
         else {
-          //TODO: fix this shit.
-          this.buttonData[i] = Math.floor(Math.random() * 10);
+          numberList[i] = parseInt(this.currentQuestion.answer);
+
+          let range = (Math.random() * this.currentQuestion.answer) + 2
+          let randomNumber = Math.floor(Math.random() * range) + 1;
+
+          while (randomNumber === this.currentQuestion.answer || numberList.includes(randomNumber)) {
+            randomNumber = Math.floor(Math.random() * range) + 3;
+          }
+          numberList[i] = randomNumber;
+          this.buttonData[i] = numberList[i];
         }
       }
 
     },
+
     onAnswer() {
       setTimeout(() => {
         this.state = 0;
@@ -162,6 +173,9 @@ export default {
   },
   async mounted() {
     this.updateQuestion()
+    setInterval(() => {
+
+    }, 1000 * 10)
   }
 }
 

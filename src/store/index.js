@@ -13,9 +13,7 @@ export default new Vuex.Store({
 
         ],
         currentUser: {
-            name: "",
-            id: 0,
-            answeredQuestionIDList: [],
+
         },
     },
     getters: {
@@ -48,13 +46,16 @@ export default new Vuex.Store({
                 })
         },
         removeUser({commit}, id){
-            axios.delete('http://localhost:3000/user/' + id)
+            axios.delete('http://localhost:3000/users/' + id)
                 .then(() =>{
                     commit('REMOVE_USER', id)
                 })
                 .catch(reason => {
                     console.log(reason)
                 });
+        },
+        setCurrentUser({commit}, user){
+            commit("SET_CURRENT_USER", user);
         }
     },
     mutations: {
@@ -64,7 +65,10 @@ export default new Vuex.Store({
         SET_USERS(state, list) {
             state.userList = list;
         },
-        REMOVE_USER: function (state, id) {
+        SET_CURRENT_USER(state, user){
+            state.currentUser = user;
+        },
+        REMOVE_USER (state, id) {
             state.userList = state.userList.filter(user => { return user.id !== id; })
         }
     }

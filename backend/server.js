@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors');
 const {userTable, questionTable} = require("./database.js");
 
-app.use(cors);
+app.use(cors())
 app.use(express.static('public'));
 
 const bodyParser = require("body-parser");
@@ -48,6 +48,7 @@ app.get("/users", (req, res, next) => {
         })
     });
 });
+
 
 
 // GET BY ID REQUESTS
@@ -111,10 +112,11 @@ app.post("/content/", (req, res, next) => {
 app.post("/users/", (req, res, next) => {
     let data = {
         name: req.body.name,
-        answered: req.body.answered,
     }
-    let sql = 'INSERT INTO users (name, answered) VALUES (?,?)';
-    let params = [data.name, data.answered];
+    if(data.name === '')
+        data.bame = ""
+    let sql = 'INSERT INTO users (name) VALUES (?)';
+    let params = [data.name];
     userTable.run(sql, params, function (err, result) {
         if (err) {
             res.status(400).json({"error": err.message})
@@ -146,7 +148,7 @@ app.delete("/content/:id", (req, res, next) => {
 
 app.delete("/users/:id", (req, res, next) => {
     userTable.run(
-        'DELETE FROM users WHERE userId = ?',
+        'DELETE FROM users WHERE id = ?',
         req.params.id,
         function (err, result) {
             if (err) {
