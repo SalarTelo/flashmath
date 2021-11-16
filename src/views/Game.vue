@@ -3,29 +3,64 @@
 
     <div class="rings-container">
 
-      <svg width="149" height="149" class="background-ring"  style="left: 15%; top: 20%" viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="149" height="149" class="background-ring" style="left: 15%; top: 20%" viewBox="0 0 149 149"
+           fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="74.5" cy="74.5" r="63.5" stroke="#7C79ED" stroke-opacity="0.7" stroke-width="22"/>
       </svg>
-      <svg width="149" height="149" class="background-ring" style="left: 90%; top: 10%"  viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="149" height="149" class="background-ring" style="left: 90%; top: 10%" viewBox="0 0 149 149"
+           fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="74.5" cy="74.5" r="63.5" stroke="#A68ECD" stroke-opacity="0.7" stroke-width="22"/>
       </svg>
-      <svg width="149" height="149" class="background-ring" style="left: 10%; top: 80%"  viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="149" height="149" class="background-ring" style="left: 10%; top: 80%" viewBox="0 0 149 149"
+           fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="74.5" cy="74.5" r="63.5" stroke="#4DAFCE" stroke-opacity="0.7" stroke-width="22"/>
       </svg>
-      <svg width="149" height="149" class="background-ring" style="right: 10%; top: 60%"  viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="149" height="149" class="background-ring" style="right: 10%; top: 60%" viewBox="0 0 149 149"
+           fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="74.5" cy="74.5" r="63.5" stroke="purple" stroke-opacity="0.7" stroke-width="22"/>
       </svg>
-      <svg width="149" height="149" class="background-ring" style="left: 30%; top: 2%"  viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="149" height="149" class="background-ring" style="left: 30%; top: 2%" viewBox="0 0 149 149" fill="none"
+           xmlns="http://www.w3.org/2000/svg">
         <circle cx="74.5" cy="74.5" r="63.5" stroke="#F5DF67" stroke-opacity="0.7" stroke-width="22"/>
       </svg>
-      <svg width="149" height="149" class="background-ring" style="left: 60%; top: 15%"  viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="149" height="149" class="background-ring" style="left: 60%; top: 15%" viewBox="0 0 149 149"
+           fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="74.5" cy="74.5" r="63.5" stroke="pink" stroke-opacity="0.7" stroke-width="22"/>
       </svg>
-      <svg width="169" height="169" class="background-ring" style="right: 70%; top: 60%"  viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="169" height="169" class="background-ring" style="right: 70%; top: 60%" viewBox="0 0 149 149"
+           fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="74.5" cy="74.5" r="63.5" stroke="lightgreen" stroke-opacity="0.7" stroke-width="22"/>
       </svg>
 
     </div>
+
+    <router-link class="user-container" to="/">
+      <div class="arrow-back">
+
+        <svg viewBox="0 0 113 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g filter="url(#filter0_d_40_38)">
+            <path
+                d="M42.6116 45.7753V36.548C42.6116 34.4945 44.1626 32.7787 46.2097 32.6165C53.0034 32.0784 67.6647 31.1986 74.673 32.9316C81.5921 34.6425 86.5139 43.7068 88.5791 48.2318C89.2765 49.76 90.7786 50.8061 92.4583 50.8061L104.248 50.8061C106.959 50.8061 108.817 48.191 107.709 45.7173C103.65 36.6538 93.2653 18.5252 74.673 17.0861C60.725 16.0065 52.3381 16.0802 47.6614 16.3533C45.0754 16.5043 42.6116 14.4084 42.6116 11.818L42.6116 4.60314C42.6116 1.32946 38.8937 -0.558003 36.2509 1.37401L5.78838 23.6437C3.49883 25.3175 3.63015 28.7763 6.04002 30.2717L36.5026 49.1741C39.1672 50.8276 42.6116 48.9112 42.6116 45.7753Z"
+                fill="white"/>
+          </g>
+          <defs>
+            <filter id="filter0_d_40_38" x="0.149002" y="0.595947" width="111.886" height="58.2102"
+                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+              <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+              <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                             result="hardAlpha"/>
+              <feOffset dy="4"/>
+              <feGaussianBlur stdDeviation="2"/>
+              <feComposite in2="hardAlpha" operator="out"/>
+              <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+              <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_40_38"/>
+              <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_40_38" result="shape"/>
+            </filter>
+          </defs>
+        </svg>
+      </div>
+    </router-link>
+
 
     <div class="flip-card">
       <div class="flip-card-inner" v-bind:class="{'question-answered' : state !== 0}">
@@ -274,7 +309,6 @@ export default {
 }
 
 .button {
-
   border-radius: 22px;
   background-color: #FA6666;
 
@@ -347,8 +381,27 @@ export default {
   margin-top: 50px;
 }
 
-.background-ring{
+.background-ring {
   position: absolute;
+}
+
+.arrow-back {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  width: 113px;
+  height: 59px;
+  cursor: pointer;
+}
+
+.arrow-back:hover {
+  width: 119px;
+  height: 63px;
+}
+
+.arrow-back:active {
+  width: 121px;
+  height: 65px;
 }
 
 @media only screen and (max-width: 375px) {
@@ -386,6 +439,7 @@ export default {
     margin: 0;
   }
 }
+
 @media only screen and (min-width: 376px) and (max-width: 767px) {
 
   .flip-card {
@@ -393,9 +447,11 @@ export default {
     height: 200px;
     width: 370px;
   }
+
   .question-section {
     font-size: 65px;
   }
+
   .button {
     border-radius: 22px;
     height: 60px;
@@ -404,17 +460,20 @@ export default {
     margin: 10px;
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px){
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
 
   .flip-card {
     border-radius: 35px;
     height: 400px;
     width: 700px;
   }
+
   .question-section {
     font-size: 150px;
   }
-  .button{
+
+  .button {
     border-radius: 20px;
     height: 90px;
     width: 290px;
