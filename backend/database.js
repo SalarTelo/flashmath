@@ -19,13 +19,12 @@ let questionTable = new sqlite3.Database(DB, (err) => {
                 let insert = 'INSERT INTO questions (question, answer, category) VALUES (?,?,?)'
 
                 for (let i = 0; i < 10; i++){
-                    for (let j = 0; j < 10; j++){
-                        let plusQuiz = i + '+' + j;
-                        let minusQuiz = i + '-' + j;
-                        questionTable.run(insert, [plusQuiz, i+j, 0])
-                        if(i >= j)
+                    let j = 10 - i;
+                    let plusQuiz = i + '+' + j;
+                    let minusQuiz = i + '-' + j;
+                    questionTable.run(insert, [plusQuiz, i+j, 0])
+                    if(i >= j)
                         questionTable.run(insert, [minusQuiz, i-j, 1])
-                    }
                 }
             }
         })
