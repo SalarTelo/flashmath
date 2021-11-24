@@ -39,6 +39,7 @@ let userTable = new sqlite3.Database(DB, (err) => {
         userTable.run(`CREATE TABLE users (
             id INTEGER PRIMARY KEY,
             Name TEXT
+            AnsweredQuestion INTEGER
             )`, (err) => {
             if (err) {
                 console.log(err)

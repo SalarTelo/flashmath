@@ -47,14 +47,12 @@
              fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="74.5" cy="74.5" r="63.5" stroke="lightgreen" stroke-opacity="0.7" stroke-width="22"/>
         </svg>
-
       </div>
     </div>
 
     <router-link to="/">
 
       <div class="arrow-back">
-
         <svg viewBox="0 0 113 59" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g filter="url(#filter0_d_40_38)">
             <path
@@ -82,12 +80,13 @@
     <div class="content">
       <div class="left-section">
         <router-link to="/quiz">
-        <div class="button-container">
-          <div class="button left-button">
-            +
+          <div class="button-container">
+            <div class="button left-button">
+              +
+            </div>
           </div>
-        </div>
         </router-link>
+
         <div class="progressbar left-progressbar">
           <div class="left-progress-fill"></div>
           <span class="text-fill">25%</span>
@@ -104,8 +103,8 @@
           <span class="text-fill">25%</span>
         </div>
       </div>
-    </div>
 
+    </div>
   </div>
 
 </template>
@@ -159,7 +158,7 @@ export default {
   color: #ffffff;
   transition: 0.1s;
   cursor: pointer;
-  box-shadow: 0 4px 10px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
 }
 
 .button:hover {
@@ -181,7 +180,7 @@ export default {
   border-radius: 10px;
   margin-top: 20px;
   position: relative;
-  box-shadow: 0 4px 10px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
 }
 
 .left-progressbar {

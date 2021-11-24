@@ -6,15 +6,9 @@ Vue.use(Vuex, axios)
 
 export default new Vuex.Store({
     state: {
-        userList: [
-
-        ],
-        questionList: [
-
-        ],
-        currentUser: {
-
-        },
+        userList: [],
+        questionList: [],
+        currentUser: {},
     },
     getters: {
         allQuestions: state => state.questionList,
@@ -33,7 +27,7 @@ export default new Vuex.Store({
                     console.log(error)
                 })
         },
-        loadUserDB({commit}){
+        loadUserDB({commit}) {
             axios
                 .get("http://localhost:3000/users/")
                 .then(data => {
@@ -45,17 +39,25 @@ export default new Vuex.Store({
                     console.log(error)
                 })
         },
-        removeUser({commit}, id){
+        removeUser({commit}, id) {
             axios.delete('http://localhost:3000/users/' + id)
-                .then(() =>{
+                .then(() => {
                     commit('REMOVE_USER', id)
                 })
                 .catch(reason => {
                     console.log(reason)
                 });
         },
-        setCurrentUser({commit}, user){
+        setCurrentUser({commit}, user) {
             commit("SET_CURRENT_USER", user);
+        },
+
+        addNewUser({commit}, newUserName) {
+            // console.log(newUserName); // UNTIL HERE IT WORKS
+            axios.post("http://localhost:3000/users/")
+                .then(() => {
+                    commit("ADD_USER", newUserName)
+                });
         }
     },
     mutations: {
@@ -65,11 +67,18 @@ export default new Vuex.Store({
         SET_USERS(state, list) {
             state.userList = list;
         },
-        SET_CURRENT_USER(state, user){
+        SET_CURRENT_USER(state, user) {
             state.currentUser = user;
         },
-        REMOVE_USER (state, id) {
-            state.userList = state.userList.filter(user => { return user.id !== id; })
+        REMOVE_USER(state, id) {
+            state.userList = state.userList.filter(user => {
+                return user.id !== id
+            })
+        },
+        ADD_USER(state, newName) {
+            let newUser;
+            newUser.name = newName;
+            state.userList = state.userList.push(newUser);
         }
     }
 })

@@ -49,11 +49,11 @@
     <div class="content-container">
 
       <div :key="user.id" v-for="user in getUsers" class="user-container">
-        <router-link  class="user-container" @click.native="setCurrentUser(user)" to="/operator">
-          <img v-bind:src="getUserIcon(user.id)[0]" class="button"  :alt=getUserIcon(user.id)[1]>
-        </router-link >
+        <router-link class="user-container" @click.native="setCurrentUser(user)" to="/operator">
+          <img v-bind:src="getUserIcon(user.id)[0]" class="button" :alt=getUserIcon(user.id)[1]>
+        </router-link>
         <div class="user-heart-container" v-on:click="deleteUser(user.id)">
-          <svg  viewBox="0 0 91 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg viewBox="0 0 91 80" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_d_40:10)">
               <path
                   d="M46.7297 4.81173C-24.6648 -17.9456 6.23697 45.9916 46.7294 72C85.0909 47.0753 113.862 -16.862 46.7297 4.81173Z"
@@ -76,9 +76,8 @@
           </svg>
           <div class="heart-text">x</div>
         </div>
-        <div class="button-text">{{user.Name}}</div>
-      </div >
-
+        <div class="button-text">{{ user.Name }}</div>
+      </div>
 
 
     </div>
@@ -109,7 +108,11 @@
           </defs>
         </svg>
       </div>
-      Add an account
+      <div class="add-account">
+        Add an account
+        <input id="new-user" v-model="newUserName">
+        <button v-on:click="addUser">Insert</button>
+      </div>
     </div>
   </div>
 </template>
@@ -123,35 +126,39 @@ export default {
     },
 
   },
-  data(){
+  data() {
     //THIS IS STUPID
     return {
       donkey: require('@/assets/img/edited/donkeh.png'),
       penguin: require('@/assets/img/edited/penguin.png'),
-      dino: require('@/assets/img/edited/dino.png')
+      dino: require('@/assets/img/edited/dino.png'),
+      newUserName: ""
     }
   },
   methods: {
-    setCurrentUser(user){
+    setCurrentUser(user) {
       this.$store.dispatch("setCurrentUser", user);
       console.log(this.$store.state.currentUser);
     },
-    getUserIcon(index){
-      index = index -1;
-      if(index < 0 || index >= 3){
-        index = Math.floor(Math.random()*3)
+    getUserIcon(index) {
+      index = index - 1;
+      if (index < 0 || index >= 3) {
+        index = Math.floor(Math.random() * 3)
       }
-      if(index === 0)
+      if (index === 0)
         return [this.donkey, "donkey"];
-      if(index === 1)
+      if (index === 1)
         return [this.penguin, "penguin"];
-      if(index === 2)
+      if (index === 2)
         return [this.dino, "dino"];
 
       return null;
     },
-    deleteUser(id){
+    deleteUser(id) {
       this.$store.dispatch("removeUser", id);
+    },
+    addUser() {
+      this.$store.dispatch("addNewUser", this.newUserName);
     }
   }
 }
@@ -398,5 +405,4 @@ export default {
   }
 }
 
-</style>
 </style>

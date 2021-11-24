@@ -36,7 +36,6 @@
 
     <router-link class="user-container" to="/">
       <div class="arrow-back">
-
         <svg viewBox="0 0 113 59" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g filter="url(#filter0_d_40_38)">
             <path
@@ -58,9 +57,12 @@
             </filter>
           </defs>
         </svg>
+
+      </div>
+      <div class="thank-you" style="width: 500px; height: 250px">
+        Thank you for playing
       </div>
     </router-link>
-
 
     <div class="flip-card">
       <div class="flip-card-inner" v-bind:class="{'question-answered' : state !== 0}">
@@ -158,7 +160,7 @@ export default {
           this.buttonData[i] = this.currentQuestion.answer;
         }
 
-        //If the button isn't the button that is supposed to display the REAL answer
+            //If the button isn't the button that is supposed to display the REAL answer
         //Display a random number
         else {
           numberList[i] = parseInt(this.currentQuestion.answer);
@@ -382,6 +384,7 @@ export default {
 }
 
 .arrow-back {
+  display: block;
   position: absolute;
   left: 10px;
   top: 10px;
@@ -390,7 +393,8 @@ export default {
   cursor: pointer;
 }
 
-.arrow-back:hover {
+.arrow-back:hover + .thank-you {
+  visibility: visible;
   width: 119px;
   height: 63px;
 }
@@ -398,6 +402,16 @@ export default {
 .arrow-back:active {
   width: 121px;
   height: 65px;
+}
+
+.thank-you {
+  border: 3px solid red;
+  background-color: white;
+  font-size: 80px;
+  position: absolute;
+  visibility: hidden;
+  left: 10px;
+  top: 80px;
 }
 
 @media only screen and (max-width: 375px) {

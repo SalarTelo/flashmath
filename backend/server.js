@@ -50,7 +50,6 @@ app.get("/users", (req, res, next) => {
 });
 
 
-
 // GET BY ID REQUESTS
 
 app.get("/content/:id", (req, res, next) => {
@@ -111,10 +110,8 @@ app.post("/content/", (req, res, next) => {
 
 app.post("/users/", (req, res, next) => {
     let data = {
-        name: req.body.name,
+        name: req.body.name
     }
-    if(data.name === '')
-        data.bame = ""
     let sql = 'INSERT INTO users (name) VALUES (?)';
     let params = [data.name];
     userTable.run(sql, params, function (err, result) {
