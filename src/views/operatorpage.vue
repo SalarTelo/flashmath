@@ -39,6 +39,30 @@
       </div>
     </div>
 
+    <div class="arrow-back">
+      <svg viewBox="0 0 113 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g filter="url(#filter0_d_40_38)">
+          <path
+              d="M42.6116 45.7753V36.548C42.6116 34.4945 44.1626 32.7787 46.2097 32.6165C53.0034 32.0784 67.6647 31.1986 74.673 32.9316C81.5921 34.6425 86.5139 43.7068 88.5791 48.2318C89.2765 49.76 90.7786 50.8061 92.4583 50.8061L104.248 50.8061C106.959 50.8061 108.817 48.191 107.709 45.7173C103.65 36.6538 93.2653 18.5252 74.673 17.0861C60.725 16.0065 52.3381 16.0802 47.6614 16.3533C45.0754 16.5043 42.6116 14.4084 42.6116 11.818L42.6116 4.60314C42.6116 1.32946 38.8937 -0.558003 36.2509 1.37401L5.78838 23.6437C3.49883 25.3175 3.63015 28.7763 6.04002 30.2717L36.5026 49.1741C39.1672 50.8276 42.6116 48.9112 42.6116 45.7753Z"
+              fill="white"/>
+        </g>
+        <defs>
+          <filter id="filter0_d_40_38" x="0.149002" y="0.595947" width="111.886" height="58.2102"
+                  filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                           result="hardAlpha"/>
+            <feOffset dy="4"/>
+            <feGaussianBlur stdDeviation="2"/>
+            <feComposite in2="hardAlpha" operator="out"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_40_38"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_40_38" result="shape"/>
+          </filter>
+        </defs>
+      </svg>
+    </div>
+
     <div class="content">
       <div class="left-section">
 
@@ -194,6 +218,26 @@ export default {
   bottom: 0;
   right: 0;
   z-index: 2;
+}
+
+.arrow-back {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  z-index: 3;
+  width: 113px;
+  height: 59px;
+  cursor: pointer;
+}
+
+.arrow-back:hover {
+  width: 119px;
+  height: 63px;
+}
+
+.arrow-back:active {
+  width: 121px;
+  height: 65px;
 }
 
 

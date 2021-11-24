@@ -40,4 +40,5 @@ body {
 .page-transition{
   transition: 0.6s;
 }
+
 </style>
