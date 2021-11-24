@@ -132,7 +132,6 @@ app.post("/users/", (req, res, next) => {
 
 
 //DELETE REQUESTS
-
 app.delete("/content/:id", (req, res, next) => {
     questionTable.run(
         'DELETE FROM questions WHERE id = ?',

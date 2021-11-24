@@ -81,27 +81,29 @@
 
     <div class="content">
       <div class="left-section">
-        <router-link to="/quiz">
-        <div class="button-container">
-          <div class="button left-button">
-            +
+        <div @click="SetQuestionCategory(0)">
+          <div class="button-container">
+            <div class="button left-button">
+              +
+            </div>
           </div>
         </div>
-        </router-link>
         <div class="progressbar left-progressbar">
-          <div class="left-progress-fill"></div>
-          <span class="text-fill">25%</span>
+          <div class="left-progress-fill" :style="GetFill(GetPlusPercentage * 100)"></div>
+          <span class="text-fill">{{GetPlusPercentage * 100}}%</span>
         </div>
       </div>
       <div class="right-section">
-        <div class="button-container">
-          <div class="button  right-button">
-            -
+        <div @click="SetQuestionCategory(1)">
+          <div class="button-container">
+            <div class="button right-button">
+              -
+            </div>
           </div>
         </div>
         <div class="progressbar right-progressbar">
-          <div class="right-progress-fill"></div>
-          <span class="text-fill">25%</span>
+          <div class="right-progress-fill" :style="GetFill(GetMinusPercentage * 100)"></div>
+          <span class="text-fill">{{GetMinusPercentage * 100}}%</span>
         </div>
       </div>
     </div>
@@ -112,7 +114,34 @@
 
 <script>
 export default {
-  name: "operatorpage"
+  name: "operatorpage",
+  computed: {
+    GetMinusPercentage() {
+      let allMinusQuestion = this.$store.getters.allMinusQuestions;
+      let answeredQuestions = this.$store.getters.allMinusAnsweredQuestions;
+
+      let answer = Math.round((answeredQuestions.length/allMinusQuestion.length) * 100) / 100;
+      return answer;
+    },
+    GetPlusPercentage() {
+      let allPlusQuestions = this.$store.getters.allPlusQuestions;
+      let answeredQuestions = this.$store.getters.allPlusAnsweredQuestions;
+
+      let answer = Math.round((answeredQuestions.length/allPlusQuestions.length) * 100) / 100;
+      return answer;
+    },
+  },
+  methods: {
+    SetQuestionCategory(category){
+      this.$store.dispatch("setCurrentCategory", category)
+      this.$router.push("/quiz");
+    },
+    GetFill(percentage){
+      return {
+        "width": (percentage) + "%",
+      };
+    }
+  }
 }
 </script>
 
@@ -213,7 +242,7 @@ export default {
 }
 
 .right-progress-fill {
-  width: 80%;
+
   height: 100%;
   background-color: #D16262;
   border-radius: 10px;

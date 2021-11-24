@@ -1,6 +1,6 @@
 <template>
   <div class="background page">
-
+  <leave-screen v-if="state === -1"></leave-screen>
     <div class="rings-container">
 
       <svg width="149" height="149" class="background-ring" style="left: 15%; top: 20%" viewBox="0 0 149 149"
@@ -34,9 +34,8 @@
 
     </div>
 
-    <router-link class="user-container" to="/">
+    <div class="user-container" v-on:click="onLeave()">
       <div class="arrow-back">
-
         <svg viewBox="0 0 113 59" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g filter="url(#filter0_d_40_38)">
             <path
@@ -59,7 +58,7 @@
           </defs>
         </svg>
       </div>
-    </router-link>
+    </div>
 
 
     <div class="flip-card">
@@ -109,10 +108,13 @@
 
 
 <script>
+import LeaveScreen from "@/component/LeaveScreen";
 export default {
 
   name: "Game",
+  components: {LeaveScreen},
   computed: {
+
     getAllQuestions() {
       return JSON.parse(JSON.stringify(this.$store.getters.allQuestions))
     },
@@ -120,10 +122,12 @@ export default {
   },
   data() {
     return {
+      database: [],
       currentQuestion: {
         id: -1,
         question: 'NaN',
-        answer: '-1'
+        answer: '-1',
+        category: -1
       },
       buttonData: [
         -1,
@@ -137,14 +141,17 @@ export default {
   methods: {
 
     updateQuestion() {
-      this.database = this.getAllQuestions;
+
+
+      this.database = this.$store.getters.getRelevantQuestions;
       //Get a random number between 0 and size of the question-database
       let questionIndex = Math.floor(Math.random() * this.database.length)
+
       //Set the current questions values.
       this.currentQuestion.question = this.database[questionIndex].question;
       this.currentQuestion.answer = this.database[questionIndex].answer;
       this.currentQuestion.id = this.database[questionIndex].id;
-
+      this.currentQuestion.category = this.$store.state.questionType;
       //Get a random button to display the real answer
       let randomButtonIndex = Math.floor(Math.random() * 4);
       this.currentQuestion.index = randomButtonIndex;
@@ -175,7 +182,10 @@ export default {
       }
 
     },
-
+    onLeave(){
+      this.state = -1;
+      setTimeout(() => this.$router.push("/operator"), 1000);
+    },
     onAnswer() {
       setTimeout(() => {
         this.state = 0;
@@ -184,6 +194,7 @@ export default {
     },
     onCorrect() {
       this.state = 1;
+      this.$store.dispatch("addQuestionToList", JSON.parse(JSON.stringify(this.currentQuestion)))
       this.onAnswer();
     },
     onIncorrect() {
@@ -200,6 +211,7 @@ export default {
     },
   },
   async mounted() {
+    this.database = []
     this.updateQuestion()
     setInterval(() => {
 

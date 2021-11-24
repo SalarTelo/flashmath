@@ -6,18 +6,27 @@ Vue.use(Vuex, axios)
 
 export default new Vuex.Store({
     state: {
-        userList: [
-
-        ],
-        questionList: [
-
-        ],
+        userList: [],
+        questionList: [],
+        questionType: 0,
         currentUser: {
-
+            answeredList: [],
         },
+
     },
     getters: {
+
+        allMinusQuestions: state => state.questionList.filter(question => question.category === 1),
+        allMinusAnsweredQuestions: state => state.currentUser.answeredList.filter(value => value.category === 1),
+
+        allPlusQuestions: state => state.questionList.filter(question => question.category === 0),
+        allPlusAnsweredQuestions: state => state.currentUser.answeredList.filter(value => value.category === 0),
+
+        allAnsweredQuestions: state => state.currentUser.answeredList,
         allQuestions: state => state.questionList,
+
+        getRelevantQuestions: state => state.questionList.filter(question => question.category === state.questionType),
+
         allUsers: state => state.userList
     },
     actions: {
@@ -33,7 +42,7 @@ export default new Vuex.Store({
                     console.log(error)
                 })
         },
-        loadUserDB({commit}){
+        loadUserDB({commit}) {
             axios
                 .get("http://localhost:3000/users/")
                 .then(data => {
@@ -45,31 +54,45 @@ export default new Vuex.Store({
                     console.log(error)
                 })
         },
-        removeUser({commit}, id){
+        removeUser({commit}, id) {
             axios.delete('http://localhost:3000/users/' + id)
-                .then(() =>{
+                .then(() => {
                     commit('REMOVE_USER', id)
                 })
                 .catch(reason => {
                     console.log(reason)
                 });
         },
-        setCurrentUser({commit}, user){
+        setCurrentUser({commit}, user) {
             commit("SET_CURRENT_USER", user);
+        },
+        addQuestionToList({commit}, question) {
+            commit("ADD_QUESTION_TO_CURRENT_USER", question);
+        },
+        setCurrentCategory({commit}, category){
+            commit("SET_QUESTION_TYPE", category)
         }
     },
     mutations: {
+        ADD_QUESTION_TO_CURRENT_USER(state, question) {
+            state.currentUser.answeredList.push(question);
+        },
         SET_QUESTIONS(state, list) {
             state.questionList = list;
         },
         SET_USERS(state, list) {
             state.userList = list;
         },
-        SET_CURRENT_USER(state, user){
+        SET_QUESTION_TYPE(state, type){
+            state.questionType = type;
+        },
+        SET_CURRENT_USER(state, user) {
             state.currentUser = user;
         },
-        REMOVE_USER (state, id) {
-            state.userList = state.userList.filter(user => { return user.id !== id; })
+        REMOVE_USER(state, id) {
+            state.userList = state.userList.filter(user => {
+                return user.id !== id;
+            })
         }
     }
 })
