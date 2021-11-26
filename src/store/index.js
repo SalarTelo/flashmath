@@ -75,7 +75,8 @@ export default new Vuex.Store({
                     commit("ADD_USER", userBody);
                 }).catch(reason => {
                 console.log(reason)
-            });
+            })
+        },
         addQuestionToList({commit}, question) {
             commit("ADD_QUESTION_TO_CURRENT_USER", question);
         },
