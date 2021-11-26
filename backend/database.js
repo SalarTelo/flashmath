@@ -38,13 +38,12 @@ let userTable = new sqlite3.Database(DB, (err) => {
     } else {
         userTable.run(`CREATE TABLE users (
             id INTEGER PRIMARY KEY,
-            Name TEXT
-            AnsweredQuestion INTEGER
+            name TEXT
             )`, (err) => {
             if (err) {
                 console.log(err)
             } else {
-                let insert = 'INSERT INTO users (Name) VALUES (?)'
+                let insert = 'INSERT INTO users (name) VALUES (?)'
                 userTable.run(insert, "Luka")
                 userTable.run(insert, "Salar")
                 userTable.run(insert, "Jessica")

@@ -52,12 +52,15 @@ export default new Vuex.Store({
             commit("SET_CURRENT_USER", user);
         },
 
-        addNewUser({commit}, newUserName) {
-            // console.log(newUserName); // UNTIL HERE IT WORKS
-            axios.post("http://localhost:3000/users/")
+        addNewUser({commit}, userBody) {
+            if (userBody.name === '')
+                return;
+            axios.post('http://localhost:3000/users/', userBody)
                 .then(() => {
-                    commit("ADD_USER", newUserName)
-                });
+                    commit("ADD_USER", userBody);
+                }).catch(reason => {
+                console.log(reason)
+            });
         }
     },
     mutations: {
@@ -75,10 +78,9 @@ export default new Vuex.Store({
                 return user.id !== id
             })
         },
-        ADD_USER(state, newName) {
-            let newUser;
-            newUser.name = newName;
-            state.userList = state.userList.push(newUser);
+        ADD_USER(state, body) {
+            body.id = state.userList.length + 1;
+            state.userList.push(body)
         }
     }
 })

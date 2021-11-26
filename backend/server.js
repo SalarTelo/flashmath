@@ -109,6 +109,7 @@ app.post("/content/", (req, res, next) => {
 })
 
 app.post("/users/", (req, res, next) => {
+    console.log(req.body)
     let data = {
         name: req.body.name
     }
