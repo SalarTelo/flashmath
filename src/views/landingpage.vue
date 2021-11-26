@@ -49,11 +49,11 @@
     <div class="content-container">
 
       <div :key="user.id" v-for="user in getUsers" class="user-container">
-        <router-link  class="user-container" @click.native="setCurrentUser(user)" to="/operator">
-          <img v-bind:src="getUserIcon(user.id)[0]" class="button"  :alt=getUserIcon(user.id)[1]>
-        </router-link >
+        <router-link class="user-container" @click.native="setCurrentUser(user)" to="/operator">
+          <img v-bind:src="getUserIcon(user.id)[0]" class="button" :alt=getUserIcon(user.id)[1]>
+        </router-link>
         <div class="user-heart-container" v-on:click="deleteUser(user.id)">
-          <svg  viewBox="0 0 91 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg viewBox="0 0 91 80" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_d_40:10)">
               <path
                   d="M46.7297 4.81173C-24.6648 -17.9456 6.23697 45.9916 46.7294 72C85.0909 47.0753 113.862 -16.862 46.7297 4.81173Z"
@@ -76,40 +76,45 @@
           </svg>
           <div class="heart-text">x</div>
         </div>
-        <div class="button-text">{{user.Name}}</div>
-      </div >
-
+        <div class="button-text">{{ user.name }}</div>
+      </div>
 
 
     </div>
 
     <div class="account-settings">
-      <div class="heart">
-        <div class="plus-sign">+</div>
-        <svg class="heart-bottom"
-             viewBox="0 0 91 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g filter="url(#filter0_d_40:10)">
-            <path
-                d="M46.7297 4.81173C-24.6648 -17.9456 6.23697 45.9916 46.7294 72C85.0909 47.0753 113.862 -16.862 46.7297 4.81173Z"
-                fill="#CE4D4D"/>
-          </g>
-          <defs>
-            <filter id="filter0_d_40:10" x="0" y="0" width="91" height="80" filterUnits="userSpaceOnUse"
-                    color-interpolation-filters="sRGB">
-              <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-              <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                             result="hardAlpha"/>
-              <feOffset dy="4"/>
-              <feGaussianBlur stdDeviation="2"/>
-              <feComposite in2="hardAlpha" operator="out"/>
-              <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
-              <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_40:10"/>
-              <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_40:10" result="shape"/>
-            </filter>
-          </defs>
-        </svg>
+
+
+      <input v-model="inputName" placeholder="Name">
+
+      <div class="add-account" v-on:click="addUser">
+        Add user
+        <div class="heart">
+          <div class="plus-sign">+</div>
+          <svg class="heart-bottom"
+               viewBox="0 0 91 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g filter="url(#filter0_d_40:10)">
+              <path
+                  d="M46.7297 4.81173C-24.6648 -17.9456 6.23697 45.9916 46.7294 72C85.0909 47.0753 113.862 -16.862 46.7297 4.81173Z"
+                  fill="#CE4D4D"/>
+            </g>
+            <defs>
+              <filter id="filter0_d_40:10" x="0" y="0" width="91" height="80" filterUnits="userSpaceOnUse"
+                      color-interpolation-filters="sRGB">
+                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                <feOffset dy="4"/>
+                <feGaussianBlur stdDeviation="2"/>
+                <feComposite in2="hardAlpha" operator="out"/>
+                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_40:10"/>
+                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_40:10" result="shape"/>
+              </filter>
+            </defs>
+          </svg>
+        </div>
       </div>
-      Add an account
+
     </div>
   </div>
 </template>
@@ -119,39 +124,43 @@ export default {
   name: "landingpage",
   computed: {
     getUsers() {
-      return JSON.parse(JSON.stringify(this.$store.getters.allUsers))
+      return this.$store.getters.allUsers
     },
 
   },
-  data(){
+  data() {
     //THIS IS STUPID
     return {
       donkey: require('@/assets/img/edited/donkeh.png'),
       penguin: require('@/assets/img/edited/penguin.png'),
-      dino: require('@/assets/img/edited/dino.png')
+      dino: require('@/assets/img/edited/dino.png'),
+      inputName: ""
     }
   },
   methods: {
-    setCurrentUser(user){
+    setCurrentUser(user) {
       this.$store.dispatch("setCurrentUser", user);
       console.log(this.$store.state.currentUser);
     },
-    getUserIcon(index){
-      index = index -1;
-      if(index < 0 || index >= 3){
-        index = Math.floor(Math.random()*3)
+    getUserIcon(index) {
+      index = index - 1;
+      if (index < 0 || index >= 3) {
+        index = 2
       }
-      if(index === 0)
+      if (index === 0)
         return [this.donkey, "donkey"];
-      if(index === 1)
+      if (index === 1)
         return [this.penguin, "penguin"];
-      if(index === 2)
+      if (index === 2)
         return [this.dino, "dino"];
 
       return null;
     },
-    deleteUser(id){
+    deleteUser(id) {
       this.$store.dispatch("removeUser", id);
+    },
+    addUser() {
+      this.$store.dispatch("addNewUser", {name: this.inputName});
     }
   }
 }
@@ -256,44 +265,72 @@ export default {
 }
 
 .account-settings {
+
   font-size: 48px;
   font-weight: bold;
+
   color: #686868;
   user-select: none;
   position: absolute;
   bottom: 10%;
-  transition: font-size 0.1s;
   cursor: pointer;
   text-shadow: 0 4px 7px rgba(0, 0, 0, 0.25);
+
+  display: flex;
+  flex-direction: row;
 }
 
-.account-settings:hover {
+.add-account{
+  transition: font-size 0.1s;
+  display: flex;
+  flex-direction: row;
+}
+.add-account:hover {
   font-size: 50px;
 }
 
-.account-settings:active {
+.add-account:active {
   transition: font-size 0.02s;
   font-size: 55px;
 }
+input{
+  background: transparent;
+  outline: none;
 
+  border-style:none;
+  border-bottom-style: solid;
+  border-color: rgba(104, 104, 104, 0.32);
+  border-bottom-width: 3px;
+
+
+  color: #686868;
+  font-family: "Comic Sans MS",serif;
+  font-size: 40px;
+  font-weight: bold;
+
+  text-align: center;
+
+  height: 50px;
+  margin-right: 20px;
+  width: 300px;
+}
+input::placeholder{
+  color: rgba(104, 104, 104, 0.44);
+}
 .background-ring {
   position: absolute;
 }
 
 .plus-sign {
   position: absolute;
-  left: -18%;
-  bottom: 13%;
   color: white;
   z-index: 99;
+  right: 4%;
 }
 
 .heart-bottom {
   height: 90px;
   width: 80px;
-  position: absolute;
-  left: -25%;
-  bottom: -20%;
 }
 
 @media only screen and (max-width: 375px) {
@@ -301,8 +338,6 @@ export default {
   .content-container {
     display: flex;
     flex-direction: column;
-    /*padding-bottom: 5px;*/
-    /*margin-top: 5px;*/
   }
 
   .button {

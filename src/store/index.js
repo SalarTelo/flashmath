@@ -66,6 +66,16 @@ export default new Vuex.Store({
         setCurrentUser({commit}, user) {
             commit("SET_CURRENT_USER", user);
         },
+
+        addNewUser({commit}, userBody) {
+            if (userBody.name === '')
+                return;
+            axios.post('http://localhost:3000/users/', userBody)
+                .then(() => {
+                    commit("ADD_USER", userBody);
+                }).catch(reason => {
+                console.log(reason)
+            });
         addQuestionToList({commit}, question) {
             commit("ADD_QUESTION_TO_CURRENT_USER", question);
         },
@@ -91,8 +101,12 @@ export default new Vuex.Store({
         },
         REMOVE_USER(state, id) {
             state.userList = state.userList.filter(user => {
-                return user.id !== id;
+                return user.id !== id
             })
+        },
+        ADD_USER(state, body) {
+            body.id = state.userList.length + 1;
+            state.userList.push(body)
         }
     }
 })
