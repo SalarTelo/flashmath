@@ -140,7 +140,6 @@ export default {
   methods: {
     setCurrentUser(user) {
       this.$store.dispatch("setCurrentUser", user);
-      console.log(this.$store.state.currentUser);
     },
     getUserIcon(index) {
       index = index - 1;
@@ -316,6 +315,11 @@ input{
 }
 input::placeholder{
   color: rgba(104, 104, 104, 0.44);
+  transition: 0.1s ease;
+
+}
+input:hover::placeholder{
+  font-size: 42px;
 }
 .background-ring {
   position: absolute;

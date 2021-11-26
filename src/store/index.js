@@ -9,20 +9,28 @@ export default new Vuex.Store({
         userList: [],
         questionList: [],
         questionType: 0,
-        currentUser: {
-            answeredList: [],
-        },
+        currentUser: {},
+        answeredList: [],
+
 
     },
     getters: {
 
         allMinusQuestions: state => state.questionList.filter(question => question.category === 1),
-        allMinusAnsweredQuestions: state => state.currentUser.answeredList.filter(value => value.category === 1),
+        allMinusAnsweredQuestions(state){
+            if(state.answeredList !== undefined)
+                return state.answeredList.filter(value => value.category === 1)
+            return [];
+        },
 
         allPlusQuestions: state => state.questionList.filter(question => question.category === 0),
-        allPlusAnsweredQuestions: state => state.currentUser.answeredList.filter(value => value.category === 0),
+        allPlusAnsweredQuestions(state){
+            if(state.answeredList !== undefined)
+             return state.answeredList.filter(value => value.category === 0)
+            return [];
+        },
 
-        allAnsweredQuestions: state => state.currentUser.answeredList,
+        allAnsweredQuestions: state => state.answeredList,
         allQuestions: state => state.questionList,
 
         getRelevantQuestions: state => state.questionList.filter(question => question.category === state.questionType),
@@ -86,7 +94,7 @@ export default new Vuex.Store({
     },
     mutations: {
         ADD_QUESTION_TO_CURRENT_USER(state, question) {
-            state.currentUser.answeredList.push(question);
+            state.answeredList.push(question);
         },
         SET_QUESTIONS(state, list) {
             state.questionList = list;

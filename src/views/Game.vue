@@ -59,9 +59,7 @@
         </svg>
 
       </div>
-      <div class="thank-you" style="width: 500px; height: 250px">
-        Thank you for playing
-      </div>
+
     </div>
 
     <div class="flip-card">
@@ -406,7 +404,7 @@ export default {
   cursor: pointer;
 }
 
-.arrow-back:hover + .thank-you {
+.arrow-back:hover {
   visibility: visible;
   width: 119px;
   height: 63px;
@@ -417,15 +415,6 @@ export default {
   height: 65px;
 }
 
-.thank-you {
-  border: 3px solid red;
-  background-color: white;
-  font-size: 80px;
-  position: absolute;
-  visibility: hidden;
-  left: 10px;
-  top: 80px;
-}
 
 @media only screen and (max-width: 375px) {
 

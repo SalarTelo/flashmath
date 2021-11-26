@@ -118,15 +118,12 @@ export default {
       let allMinusQuestion = this.$store.getters.allMinusQuestions;
       let answeredQuestions = this.$store.getters.allMinusAnsweredQuestions;
 
-      let answer = Math.round((answeredQuestions.length/allMinusQuestion.length) * 100) / 100;
-      return answer;
+      return Math.round((answeredQuestions.length / allMinusQuestion.length) * 100) / 100;
     },
     GetPlusPercentage() {
       let allPlusQuestions = this.$store.getters.allPlusQuestions;
       let answeredQuestions = this.$store.getters.allPlusAnsweredQuestions;
-
-      let answer = Math.round((answeredQuestions.length/allPlusQuestions.length) * 100) / 100;
-      return answer;
+      return Math.round((answeredQuestions.length / allPlusQuestions.length) * 100) / 100;
     },
   },
   methods: {
